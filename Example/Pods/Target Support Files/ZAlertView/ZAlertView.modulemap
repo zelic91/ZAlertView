@@ -1,0 +1,6 @@
+framework module ZAlertView {
+  umbrella header "ZAlertView-umbrella.h"
+
+  export *
+  module * { export * }
+}

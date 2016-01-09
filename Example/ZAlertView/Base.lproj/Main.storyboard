@@ -1,25 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ZAlertView_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vj8-ro-4dZ">
+                                <rect key="frame" x="20" y="75" width="280" height="44"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="1" alpha="0.48999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Ur1-OY-kpF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="Alert Dialog">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="alertDialogButtonDidTouch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uRt-wV-hAk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-7W-pR7">
+                                <rect key="frame" x="20" y="127" width="280" height="44"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="1" alpha="0.48999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="3Rw-TE-g35"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="Confirm Dialog">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmDialogButtonDidTouch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="T4T-9m-Dim"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZt-IS-Bp1">
+                                <rect key="frame" x="20" y="179" width="280" height="44"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="1" alpha="0.48999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mbu-ou-QJa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="Input Dialog">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="inputDialogButtonDidTouch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Cp-hT-Jsy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8o-E2-shx">
+                                <rect key="frame" x="20" y="231" width="280" height="44"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="1" blue="1" alpha="0.48999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1uh-pH-5t4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <state key="normal" title="Multiple Choice Dialog">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="multipleChoiceDialogButtonDidTouch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="akf-SO-J8G"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZAlertView Sample" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHP-kr-gdC">
+                                <rect key="frame" x="20" y="28" width="280" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="Rik-3M-DVa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="KeR-7W-pR7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="5vN-fd-Bdt"/>
+                            <constraint firstAttribute="trailing" secondItem="m8o-E2-shx" secondAttribute="trailing" constant="20" id="7EG-bS-XXi"/>
+                            <constraint firstItem="Vj8-ro-4dZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="PUt-13-Ziq"/>
+                            <constraint firstItem="m8o-E2-shx" firstAttribute="top" secondItem="oZt-IS-Bp1" secondAttribute="bottom" constant="8" id="Pv3-rk-KFn"/>
+                            <constraint firstAttribute="trailing" secondItem="oZt-IS-Bp1" secondAttribute="trailing" constant="20" id="RLM-6O-N67"/>
+                            <constraint firstItem="oZt-IS-Bp1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="S2j-QY-8iD"/>
+                            <constraint firstAttribute="trailing" secondItem="UHP-kr-gdC" secondAttribute="trailing" constant="20" id="XRf-0Z-Tvk"/>
+                            <constraint firstItem="Vj8-ro-4dZ" firstAttribute="top" secondItem="UHP-kr-gdC" secondAttribute="bottom" constant="8" id="cSW-QB-DEb"/>
+                            <constraint firstItem="UHP-kr-gdC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="eS8-RU-nMf"/>
+                            <constraint firstAttribute="trailing" secondItem="Vj8-ro-4dZ" secondAttribute="trailing" constant="20" id="iGH-f7-cJ4"/>
+                            <constraint firstItem="m8o-E2-shx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="iye-va-wRf"/>
+                            <constraint firstItem="KeR-7W-pR7" firstAttribute="top" secondItem="Vj8-ro-4dZ" secondAttribute="bottom" constant="8" id="knL-67-U2r"/>
+                            <constraint firstItem="UHP-kr-gdC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="28" id="lqY-Qi-5ru"/>
+                            <constraint firstItem="Vj8-ro-4dZ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="28" id="mt5-U8-dx8"/>
+                            <constraint firstAttribute="trailing" secondItem="KeR-7W-pR7" secondAttribute="trailing" constant="20" id="vIF-ST-1cJ"/>
+                            <constraint firstItem="oZt-IS-Bp1" firstAttribute="top" secondItem="KeR-7W-pR7" secondAttribute="bottom" constant="8" id="zUI-j8-ayu"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="mt5-U8-dx8"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="305" y="389"/>
         </scene>
     </scenes>
 </document>
