@@ -1,4 +1,4 @@
-# ZAlertView
+# ZAlertView - AlertView written in Swift
 
 [![Version](https://img.shields.io/cocoapods/v/ZAlertView.svg?style=flat)](http://cocoapods.org/pods/ZAlertView)
 [![License](https://img.shields.io/cocoapods/l/ZAlertView.svg?style=flat)](http://cocoapods.org/pods/ZAlertView)
@@ -15,7 +15,7 @@ ZAlertView is a highly customizable dialog (exaggerated, right?) view which can 
 
 ## Usage
 
-There are 4 types of dialog that ZAlertView currently supports: Alert, Yes-No, Input and Multiple choice:
+There are 3 types of dialog that ZAlertView currently supports: Alert, Confirmation (Yes/No) and  Multiple choice. TextFields can also be added to any of those types.
 
 ```swift
   public enum AlertType: Int {
@@ -122,6 +122,38 @@ For a specific dialog, there are customizable properties as below:
   // Master views
   public var backgroundView: UIView!
   public var alertView: UIView!
+```
+
+For dialogs that need multiple buttons, please use AlertType.MultipleChoice. In such case, use the convenient method to add buttons to the dialog. Cool things is that we can use hex color directly here:
+
+```swift
+  public func addButton(title: "Button", touchHandler: TouchHandler)
+
+  public func addButton(title: "Button", color: UIColor?, titleColor: UIColor?, touchHandler: TouchHandler)
+
+  public func addButton(title: "Button", hexColor: String, hexTitleColor: String, touchHandler: TouchHandler)
+
+  public func addButton(title: "Button", font: UIFont, touchHandler: TouchHandler)
+
+  public func addButton(title: "Button", font: UIFont, color: UIColor?, titleColor: UIColor?, touchHandler: TouchHandler)
+```
+
+Similarly, we can also add textfields to the dialog. Each textfield needs an identifier for later manipulation:
+
+```swift
+  public func addTextField(identifier: String, placeHolder: String)
+
+  public func addTextField(identifier: String, placeHolder: String, isSecured: Bool)
+
+  public func addTextField(identifier: String, placeHolder: String, keyboardType: UIKeyboardType)
+
+  public func addTextField(identifier: String, placeHolder: String, keyboardType: UIKeyboardType, font: UIFont, padding: CGFloat, isSecured: Bool)
+```
+
+To get a textfield:
+
+```swift
+  public func getTextFieldWithIdentifier(identifier: String) -> UITextField?
 ```
 
 ## Installation
