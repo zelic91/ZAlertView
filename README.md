@@ -4,6 +4,11 @@
 [![License](https://img.shields.io/cocoapods/l/ZAlertView.svg?style=flat)](http://cocoapods.org/pods/ZAlertView)
 [![Platform](https://img.shields.io/cocoapods/p/ZAlertView.svg?style=flat)](http://cocoapods.org/pods/ZAlertView)
 
+![alt text](https://raw.githubusercontent.com/zelic91/ZAlertView/master/Screenshots/ZA_01.png "")
+![alt text](https://raw.githubusercontent.com/zelic91/ZAlertView/master/Screenshots/ZA_02.png "")
+![alt text](https://raw.githubusercontent.com/zelic91/ZAlertView/master/Screenshots/ZA_03.png "")
+![alt text](https://raw.githubusercontent.com/zelic91/ZAlertView/master/Screenshots/ZA_04.png "")
+
 ## Introduction
 
 ZAlertView is a highly customizable dialog (exaggerated, right?) view which can be used as a substitution for UIAlertView. It's written in Swift. This is the gift I give to myself on my 26th birthday.
@@ -31,12 +36,6 @@ Then show the dialog as below:
 ```swift
   let dialog = ZAlertView()
   dialog.show()
-```
-
-Dismiss it is the most intuitive thing in this world:
-
-```swift
-  dialog.dismiss
 ```
 
 There are more convenient constructors for you to use:
@@ -109,19 +108,20 @@ There are also some basic animations:
 For a specific dialog, there are customizable properties as below:
 
 ```swift
-    public var alertType: AlertType
-    public var alertTitle: String?
-    public var message: String?
-    public var okTitle: String?
-    public var cancelTitle: String?
-    public var closeTitle: String?
-    public var isOkButtonLeft: Bool
-    public var allowTouchOutsideToDismiss: Bool
-    public var width: CGFloat
-    public var height: CGFloat
+  public var alertType: AlertType
+  public var alertTitle: String?
+  public var message: String?
+  public var okTitle: String?
+  public var cancelTitle: String?
+  public var closeTitle: String?
+  public var isOkButtonLeft: Bool
+  public var allowTouchOutsideToDismiss: Bool
+  public var width: CGFloat = ZAlertView.AlertWidth
+  public var height: CGFloat = ZAlertView.AlertHeight
 
-    public var backgroundView: UIView!
-    public var alertView: UIView!
+  // Master views
+  public var backgroundView: UIView!
+  public var alertView: UIView!
 ```
 
 ## Installation
