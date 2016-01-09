@@ -193,6 +193,9 @@ public class ZAlertView: UIViewController {
     }
     
     func setupWindow() {
+        if viewNotReady() {
+            return
+        }
         let window = UIWindow(frame: (UIApplication.sharedApplication().keyWindow?.bounds)!)
         self.alertWindow = window
         self.alertWindow.windowLevel = UIWindowLevelAlert
@@ -202,6 +205,9 @@ public class ZAlertView: UIViewController {
     }
     
     func setupViews() {
+        if viewNotReady() {
+            return
+        }
         self.view = UIView(frame: (UIApplication.sharedApplication().keyWindow?.bounds)!)
         
         // Setup background view
@@ -284,20 +290,22 @@ public class ZAlertView: UIViewController {
     
     override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        let bounds = self.view.bounds
-        self.alertView.frame = CGRectMake(bounds.width/2 - width/2, bounds.height/2 - height/2, width, height)
+        var hasContent = false
         
         if let title = self.alertTitle {
+            hasContent = true
             self.height = ZAlertView.padding
             lbTitle.text = title
             let size = lbTitle.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
             let childHeight = size.height
             lbTitle.frame = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, childHeight)
             height += childHeight
+        } else {
+            self.height = 0
         }
         
         if let message = self.message {
+            hasContent = true
             self.height += ZAlertView.padding
             lbMessage.text = message
             let size = lbMessage.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
@@ -307,6 +315,7 @@ public class ZAlertView: UIViewController {
         }
         
         if textFields.count > 0 {
+            hasContent = true
             for textField in textFields {
                 self.height += ZAlertView.innerPadding
                 textField.frame = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, ZAlertView.textFieldHeight)
@@ -318,7 +327,9 @@ public class ZAlertView: UIViewController {
         
         switch alertType {
         case .Alert:
-            self.height += ZAlertView.buttonSectionExtraGap
+            if hasContent {
+                self.height += ZAlertView.buttonSectionExtraGap
+            }
             let buttonWidth = width -  ZAlertView.padding * 2
             btnClose.frame = CGRectMake(ZAlertView.padding, height, buttonWidth, ZAlertView.buttonHeight)
             btnClose.setBackgroundImage(UIImage.imageWithSolidColor(ZAlertView.positiveColor, size: btnClose.frame.size), forState: UIControlState.Normal)
@@ -374,6 +385,8 @@ public class ZAlertView: UIViewController {
         }
         
         self.height += ZAlertView.padding
+        let bounds = self.view.bounds
+        self.alertView.frame = CGRectMake(bounds.width/2 - width/2, bounds.height/2 - height/2, width, height)
     }
     
     // MARK: - Convenient helpers
@@ -509,6 +522,10 @@ public class ZAlertView: UIViewController {
     }
     
     public func showWithDuration(duration: Double) {
+        if viewNotReady() {
+            return
+        }
+        
         self.alertWindow.addSubview(self.view)
         self.alertWindow.makeKeyAndVisible()
         switch ZAlertView.showAnimation {
@@ -607,6 +624,10 @@ public class ZAlertView: UIViewController {
                 },
                 completion: completion)
         }
+    }
+    
+    func viewNotReady() -> Bool {
+        return UIApplication.sharedApplication().keyWindow == nil
     }
     
     // MARK: - Subclasses
