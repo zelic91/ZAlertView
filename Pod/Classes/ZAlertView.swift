@@ -502,6 +502,9 @@ public class ZAlertView: UIViewController {
     }
     
     func keyboardDidHide(notification: NSNotification) {
+        if self.oldFrame == nil {
+            return
+        }
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.alertView.frame = self.oldFrame
         })
