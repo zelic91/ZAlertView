@@ -28,6 +28,7 @@ class ViewController: UIViewController {
                 alertView.dismiss()
             }
         )
+        dialog.allowTouchOutsideToDismiss = false
         
         dialog.show()
     }
@@ -46,6 +47,7 @@ class ViewController: UIViewController {
             }
         )
         dialog.show()
+        dialog.allowTouchOutsideToDismiss = true
     }
     
     @IBAction func inputDialogButtonDidTouch(sender: AnyObject) {

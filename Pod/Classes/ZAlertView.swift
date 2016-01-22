@@ -92,8 +92,19 @@ public class ZAlertView: UIViewController {
         }
     }
     
+    public var allowTouchOutsideToDismiss: Bool = true {
+        didSet {
+            if allowTouchOutsideToDismiss == false {
+                self.tapOutsideTouchGestureRecognizer.removeTarget(self, action: "dismiss")
+            }
+            else {
+                self.tapOutsideTouchGestureRecognizer.addTarget(self, action: "dismiss")
+            }
+        }
+    }
+    private var tapOutsideTouchGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+    
     public var isOkButtonLeft: Bool = false
-    public var allowTouchOutsideToDismiss: Bool = true
     public var width: CGFloat = ZAlertView.AlertWidth
     public var height: CGFloat = ZAlertView.AlertHeight
 
@@ -219,11 +230,10 @@ public class ZAlertView: UIViewController {
             self.backgroundView.alpha = ZAlertView.backgroundAlpha
         }
         // Gesture for background
-        if allowTouchOutsideToDismiss {
-            let touchGesture = UITapGestureRecognizer()
-            touchGesture.addTarget(self, action: Selector("dismiss"))
-            backgroundView.addGestureRecognizer(touchGesture)
+        if allowTouchOutsideToDismiss == true {
+            self.tapOutsideTouchGestureRecognizer.addTarget(self, action: "dismiss")
         }
+        backgroundView.addGestureRecognizer(self.tapOutsideTouchGestureRecognizer)
         self.view.addSubview(backgroundView)
         
         // Setup alert view
