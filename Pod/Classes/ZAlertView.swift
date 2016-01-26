@@ -349,7 +349,9 @@ public class ZAlertView: UIViewController {
             self.height += ZAlertView.buttonHeight
             
         case .Confirmation:
-            self.height += ZAlertView.buttonSectionExtraGap
+            if hasContent {
+                self.height += ZAlertView.buttonSectionExtraGap
+            }
             let buttonWidth = (width - ZAlertView.padding * 2 - ZAlertView.innerPadding) / 2
             
             if isOkButtonLeft {
@@ -372,7 +374,9 @@ public class ZAlertView: UIViewController {
             self.height += ZAlertView.buttonHeight
             
         case .MultipleChoice:
-            self.height += ZAlertView.buttonSectionExtraGap
+            if hasContent {
+                self.height += ZAlertView.buttonSectionExtraGap
+            }
             for button in buttons {
                 button.frame = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, ZAlertView.buttonHeight)
                 if button.color != nil {
