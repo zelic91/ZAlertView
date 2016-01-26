@@ -276,6 +276,21 @@ public class ZAlertView: UIViewController {
         }
         self.btnClose.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
         self.alertView.addSubview(btnClose)
+        
+        // Setup font
+        if let titleFont = ZAlertView.alertTitleFont {
+            lbTitle.font = titleFont
+        }
+        
+        if let messageFont = ZAlertView.messageFont {
+            lbMessage.font = messageFont
+        }
+        
+        if let buttonFont = ZAlertView.buttonFont {
+            btnOk.titleLabel?.font = buttonFont
+            btnCancel.titleLabel?.font = buttonFont
+            btnCancel.titleLabel?.font = buttonFont
+        }
     }
     
     // MARK: - Life cycle
@@ -395,7 +410,7 @@ public class ZAlertView: UIViewController {
         addTextField(identifier,
             placeHolder: placeHolder,
             keyboardType: UIKeyboardType.Default,
-            font: UIFont.systemFontOfSize(14),
+            font: ZAlertView.messageFont ?? UIFont.systemFontOfSize(14),
             padding: ZAlertView.padding,
             isSecured: false)
     }
@@ -404,7 +419,7 @@ public class ZAlertView: UIViewController {
         addTextField(identifier,
             placeHolder: placeHolder,
             keyboardType: UIKeyboardType.Default,
-            font: UIFont.systemFontOfSize(14),
+            font: ZAlertView.messageFont ?? UIFont.systemFontOfSize(14),
             padding: ZAlertView.padding,
             isSecured: true)
     }
@@ -414,7 +429,7 @@ public class ZAlertView: UIViewController {
         addTextField(identifier,
             placeHolder: placeHolder,
             keyboardType: keyboardType,
-            font: UIFont.systemFontOfSize(14),
+            font: ZAlertView.messageFont ?? UIFont.systemFontOfSize(14),
             padding: ZAlertView.padding,
             isSecured: false)
     }
@@ -443,15 +458,15 @@ public class ZAlertView: UIViewController {
     }
     
     public func addButton(title: String, touchHandler: TouchHandler) {
-        addButton(title, font: UIFont.boldSystemFontOfSize(14), touchHandler: touchHandler)
+        addButton(title, font: ZAlertView.messageFont ?? UIFont.boldSystemFontOfSize(14), touchHandler: touchHandler)
     }
     
     public func addButton(title: String, color: UIColor?, titleColor: UIColor?, touchHandler: TouchHandler) {
-        addButton(title, font: UIFont.boldSystemFontOfSize(14), color: color, titleColor: titleColor, touchHandler: touchHandler)
+        addButton(title, font: ZAlertView.messageFont ?? UIFont.boldSystemFontOfSize(14), color: color, titleColor: titleColor, touchHandler: touchHandler)
     }
     
     public func addButton(title: String, hexColor: String, hexTitleColor: String, touchHandler: TouchHandler) {
-        addButton(title, font: UIFont.boldSystemFontOfSize(14), color: UIColor.color(hexColor), titleColor: UIColor.color(hexTitleColor), touchHandler: touchHandler)
+        addButton(title, font: ZAlertView.messageFont ?? UIFont.boldSystemFontOfSize(14), color: UIColor.color(hexColor), titleColor: UIColor.color(hexTitleColor), touchHandler: touchHandler)
     }
     
     public func addButton(title: String, font: UIFont, touchHandler: TouchHandler) {
