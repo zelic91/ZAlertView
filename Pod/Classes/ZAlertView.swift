@@ -246,7 +246,7 @@ public class ZAlertView: UIViewController {
         self.lbTitle = UILabel()
         self.lbTitle.textAlignment = NSTextAlignment.Center
         self.lbTitle.textColor = ZAlertView.titleColor
-        self.lbTitle.font = UIFont.boldSystemFontOfSize(16)
+        self.lbTitle.font = ZAlertView.alertTitleFont ?? UIFont.boldSystemFontOfSize(16)
         self.alertView.addSubview(lbTitle)
         
         // Setup message
@@ -254,7 +254,7 @@ public class ZAlertView: UIViewController {
         self.lbMessage.textAlignment = NSTextAlignment.Center
         self.lbMessage.numberOfLines = 0
         self.lbMessage.textColor = ZAlertView.messageColor
-        self.lbMessage.font = UIFont.systemFontOfSize(14)
+        self.lbMessage.font = ZAlertView.messageFont ?? UIFont.systemFontOfSize(14)
         self.alertView.addSubview(lbMessage)
         
         // Setup OK Button
@@ -264,7 +264,7 @@ public class ZAlertView: UIViewController {
         } else {
             self.btnOk.setTitle("OK", forState: UIControlState.Normal)
         }
-        self.btnOk.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnOk.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
         self.alertView.addSubview(btnOk)
         
         // Setup Cancel Button
@@ -274,7 +274,7 @@ public class ZAlertView: UIViewController {
         } else {
             self.btnCancel.setTitle("Cancel", forState: UIControlState.Normal)
         }
-        self.btnCancel.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnCancel.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
         self.alertView.addSubview(btnCancel)
         
         // Setup Close button
@@ -284,23 +284,8 @@ public class ZAlertView: UIViewController {
         } else {
             self.btnClose.setTitle("Close", forState: UIControlState.Normal)
         }
-        self.btnClose.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnClose.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
         self.alertView.addSubview(btnClose)
-        
-        // Setup font
-        if let titleFont = ZAlertView.alertTitleFont {
-            lbTitle.font = titleFont
-        }
-        
-        if let messageFont = ZAlertView.messageFont {
-            lbMessage.font = messageFont
-        }
-        
-        if let buttonFont = ZAlertView.buttonFont {
-            btnOk.titleLabel?.font = buttonFont
-            btnCancel.titleLabel?.font = buttonFont
-            btnCancel.titleLabel?.font = buttonFont
-        }
     }
     
     // MARK: - Life cycle
