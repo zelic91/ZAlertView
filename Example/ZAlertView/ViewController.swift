@@ -22,16 +22,16 @@ class ViewController: UIViewController {
     
     @IBAction func alertDialogButtonDidTouch(sender: AnyObject) {
         let dialog = ZAlertView(title: "Success",
-            message: "Thank you for purchasing our products. Have a nice day.",
+            message: nil,
             closeButtonText: "Okay",
             closeButtonHandler: { alertView in
                 alertView.dismiss()
             }
         )
         dialog.allowTouchOutsideToDismiss = false
-        
-        
-        
+        let attrStr = NSMutableAttributedString(string: "Are you sure you want to quit?")
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(10, 12))
+        dialog.messageAttributedString = attrStr
         dialog.show()
     }
     

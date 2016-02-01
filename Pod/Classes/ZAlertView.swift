@@ -33,27 +33,27 @@ public class ZAlertView: UIViewController {
     
     public typealias TouchHandler = (ZAlertView) -> ()
 
-    static let Padding: CGFloat = 12
-    static let InnerPadding: CGFloat = 8
-    static let CornerRadius: CGFloat = 4
-    static let ButtonHeight: CGFloat = 40
+    static let Padding: CGFloat               = 12
+    static let InnerPadding: CGFloat          = 8
+    static let CornerRadius: CGFloat          = 4
+    static let ButtonHeight: CGFloat          = 40
     static let ButtonSectionExtraGap: CGFloat = 12
-    static let TextFieldHeight: CGFloat = 40
-    static let AlertWidth: CGFloat = 280
-    static let AlertHeight: CGFloat = 65
-    static let BackgroundAlpha: CGFloat = 0.5
+    static let TextFieldHeight: CGFloat       = 40
+    static let AlertWidth: CGFloat            = 280
+    static let AlertHeight: CGFloat           = 65
+    static let BackgroundAlpha: CGFloat       = 0.5
     
     // MARK: - Global
-    public static var padding: CGFloat = ZAlertView.Padding
-    public static var innerPadding: CGFloat = ZAlertView.InnerPadding
-    public static var cornerRadius: CGFloat = ZAlertView.CornerRadius
-    public static var buttonHeight: CGFloat = ZAlertView.ButtonHeight
+    public static var padding: CGFloat               = ZAlertView.Padding
+    public static var innerPadding: CGFloat          = ZAlertView.InnerPadding
+    public static var cornerRadius: CGFloat          = ZAlertView.CornerRadius
+    public static var buttonHeight: CGFloat          = ZAlertView.ButtonHeight
     public static var buttonSectionExtraGap: CGFloat = ZAlertView.ButtonSectionExtraGap
-    public static var textFieldHeight: CGFloat = ZAlertView.TextFieldHeight
-    public static var backgroundAlpha: CGFloat = ZAlertView.BackgroundAlpha
-    public static var blurredBackground: Bool = false
-    public static var showAnimation: ShowAnimation = .FadeIn
-    public static var hideAnimation: HideAnimation = .FadeOut
+    public static var textFieldHeight: CGFloat       = ZAlertView.TextFieldHeight
+    public static var backgroundAlpha: CGFloat       = ZAlertView.BackgroundAlpha
+    public static var blurredBackground: Bool        = false
+    public static var showAnimation: ShowAnimation   = .FadeIn
+    public static var hideAnimation: HideAnimation   = .FadeOut
     
     // Font
     public static var alertTitleFont: UIFont?
@@ -61,18 +61,20 @@ public class ZAlertView: UIViewController {
     public static var buttonFont: UIFont?
     
     // Color
-    public static var positiveColor: UIColor? = UIColor(red:0.09, green:0.47, blue:0.24, alpha:1.0)
-    public static var negativeColor: UIColor? = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
-    public static var neutralColor: UIColor? = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
-    public static var titleColor: UIColor? = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var messageColor: UIColor? = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var cancelTextColor: UIColor? = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var normalTextColor: UIColor? = UIColor.whiteColor()
+    public static var positiveColor: UIColor?    = UIColor(red:0.09, green:0.47, blue:0.24, alpha:1.0)
+    public static var negativeColor: UIColor?    = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
+    public static var neutralColor: UIColor?     = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
+    public static var titleColor: UIColor?       = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var buttonTitleColor: UIColor? = UIColor.whiteColor()
+    public static var messageColor: UIColor?     = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var cancelTextColor: UIColor?  = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var normalTextColor: UIColor?  = UIColor.whiteColor()
     
     // MARK: -
     public var alertType: AlertType = AlertType.Alert
     public var alertTitle: String?
     public var message: String?
+    public var messageAttributedString: NSAttributedString?
     
     public var okTitle: String? {
         didSet {
@@ -237,24 +239,24 @@ public class ZAlertView: UIViewController {
         self.view.addSubview(backgroundView)
         
         // Setup alert view
-        self.alertView = UIView(frame: CGRectMake(0, 0, width, height))
-        self.alertView.backgroundColor = UIColor.whiteColor()
+        self.alertView                    = UIView(frame: CGRectMake(0, 0, width, height))
+        self.alertView.backgroundColor    = UIColor.whiteColor()
         self.alertView.layer.cornerRadius = ZAlertView.CornerRadius
         self.view.addSubview(alertView)
         
         // Setup title
-        self.lbTitle = UILabel()
+        self.lbTitle               = UILabel()
         self.lbTitle.textAlignment = NSTextAlignment.Center
-        self.lbTitle.textColor = ZAlertView.titleColor
-        self.lbTitle.font = ZAlertView.alertTitleFont ?? UIFont.boldSystemFontOfSize(16)
+        self.lbTitle.textColor     = ZAlertView.titleColor
+        self.lbTitle.font          = ZAlertView.alertTitleFont ?? UIFont.boldSystemFontOfSize(16)
         self.alertView.addSubview(lbTitle)
         
         // Setup message
-        self.lbMessage = UILabel()
+        self.lbMessage               = UILabel()
         self.lbMessage.textAlignment = NSTextAlignment.Center
         self.lbMessage.numberOfLines = 0
-        self.lbMessage.textColor = ZAlertView.messageColor
-        self.lbMessage.font = ZAlertView.messageFont ?? UIFont.systemFontOfSize(14)
+        self.lbMessage.textColor     = ZAlertView.messageColor
+        self.lbMessage.font          = ZAlertView.messageFont ?? UIFont.systemFontOfSize(14)
         self.alertView.addSubview(lbMessage)
         
         // Setup OK Button
@@ -303,25 +305,33 @@ public class ZAlertView: UIViewController {
         var hasContent = false
         
         if let title = self.alertTitle {
-            hasContent = true
-            self.height = ZAlertView.padding
-            lbTitle.text = title
-            let size = lbTitle.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
+            hasContent      = true
+            self.height     = ZAlertView.padding
+            lbTitle.text    = title
+            let size        = lbTitle.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
             let childHeight = size.height
-            lbTitle.frame = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, childHeight)
-            height += childHeight
+            lbTitle.frame   = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, childHeight)
+            height          += childHeight
         } else {
             self.height = 0
         }
         
         if let message = self.message {
-            hasContent = true
-            self.height += ZAlertView.padding
-            lbMessage.text = message
-            let size = lbMessage.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
+            hasContent      = true
+            self.height     += ZAlertView.padding
+            lbMessage.text  = message
+            let size        = lbMessage.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
             let childHeight = size.height
             lbMessage.frame = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, childHeight)
-            height += childHeight
+            height          += childHeight
+        } else if let messageAttributedString = self.messageAttributedString {
+            hasContent               = true
+            self.height              += ZAlertView.padding
+            lbMessage.attributedText = messageAttributedString
+            let size                 = lbMessage.sizeThatFits(CGSize(width: width - ZAlertView.padding * 2, height: 600))
+            let childHeight          = size.height
+            lbMessage.frame          = CGRectMake(ZAlertView.padding, height, width - ZAlertView.padding * 2, childHeight)
+            height                   += childHeight
         }
         
         if textFields.count > 0 {
@@ -340,13 +350,13 @@ public class ZAlertView: UIViewController {
             if hasContent {
                 self.height += ZAlertView.buttonSectionExtraGap
             }
-            let buttonWidth = width -  ZAlertView.padding * 2
-            btnClose.frame = CGRectMake(ZAlertView.padding, height, buttonWidth, ZAlertView.buttonHeight)
+            let buttonWidth             = width -  ZAlertView.padding * 2
+            btnClose.frame              = CGRectMake(ZAlertView.padding, height, buttonWidth, ZAlertView.buttonHeight)
             btnClose.setBackgroundImage(UIImage.imageWithSolidColor(ZAlertView.positiveColor, size: btnClose.frame.size), forState: UIControlState.Normal)
             btnClose.layer.cornerRadius = ZAlertView.cornerRadius
-            btnClose.clipsToBounds = true
+            btnClose.clipsToBounds      = true
             btnClose.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
-            self.height += ZAlertView.buttonHeight
+            self.height                 += ZAlertView.buttonHeight
             
         case .Confirmation:
             if hasContent {
@@ -387,7 +397,7 @@ public class ZAlertView: UIViewController {
                 if button.titleColor != nil {
                     button.setTitleColor(button.titleColor!, forState: .Normal)
                 } else {
-                    button.setTitleColor(ZAlertView.titleColor, forState: .Normal)
+                    button.setTitleColor(ZAlertView.buttonTitleColor, forState: .Normal)
                 }
                 button.layer.cornerRadius = ZAlertView.cornerRadius
                 button.clipsToBounds = true
@@ -434,16 +444,16 @@ public class ZAlertView: UIViewController {
     }
     
     public func addTextField(identifier: String, placeHolder: String, keyboardType: UIKeyboardType, font: UIFont, padding: CGFloat, isSecured: Bool) {
-        let textField = ZTextField(identifier: identifier)
-        textField.leftView = UIView(frame: CGRectMake(0, 0, padding, ZAlertView.textFieldHeight))
-        textField.rightView = UIView(frame: CGRectMake(0, 0, padding, ZAlertView.textFieldHeight))
-        textField.leftViewMode = UITextFieldViewMode.Always
-        textField.rightViewMode = UITextFieldViewMode.Always
-        textField.keyboardType = keyboardType
-        textField.font = font
-        textField.placeholder = placeHolder
+        let textField                = ZTextField(identifier: identifier)
+        textField.leftView           = UIView(frame: CGRectMake(0, 0, padding, ZAlertView.textFieldHeight))
+        textField.rightView          = UIView(frame: CGRectMake(0, 0, padding, ZAlertView.textFieldHeight))
+        textField.leftViewMode       = UITextFieldViewMode.Always
+        textField.rightViewMode      = UITextFieldViewMode.Always
+        textField.keyboardType       = keyboardType
+        textField.font               = font
+        textField.placeholder        = placeHolder
         textField.layer.cornerRadius = ZAlertView.cornerRadius
-        textField.layer.borderWidth = 1
+        textField.layer.borderWidth  = 1
         if ZAlertView.positiveColor != nil {
             textField.layer.borderColor = ZAlertView.positiveColor!.CGColor
         }
@@ -473,10 +483,10 @@ public class ZAlertView: UIViewController {
     }
     
     public func addButton(title: String, font: UIFont, color: UIColor?, titleColor: UIColor?, touchHandler: TouchHandler) {
-        let button = ZButton(touchHandler: touchHandler)
+        let button              = ZButton(touchHandler: touchHandler)
         button.setTitle(title, forState: .Normal)
-        button.color = color
-        button.titleColor = titleColor
+        button.color            = color
+        button.titleColor       = titleColor
         button.titleLabel?.font = font
         button.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
         buttons.append(button)
