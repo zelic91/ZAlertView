@@ -21,6 +21,10 @@ public class ZAlertView: UIViewController {
         case FlyTop
         case FlyRight
         case FlyBottom
+        case BounceLeft
+        case BounceRight
+        case BounceBottom
+        case BounceTop
     }
     
     public enum HideAnimation: Int {
@@ -29,6 +33,11 @@ public class ZAlertView: UIViewController {
         case FlyTop
         case FlyRight
         case FlyBottom
+        case BounceLeft
+        case BounceRight
+        case BounceBottom
+        case BounceTop
+        
     }
     
     public typealias TouchHandler = (ZAlertView) -> ()
@@ -54,6 +63,10 @@ public class ZAlertView: UIViewController {
     public static var blurredBackground: Bool = false
     public static var showAnimation: ShowAnimation = .FadeIn
     public static var hideAnimation: HideAnimation = .FadeOut
+    public static var duration:CGFloat = 0.3
+    public static var initialSpringVelocity:CGFloat = 0.5
+    public static var damping:CGFloat = 0.5
+    
     
     // Font
     public static var alertTitleFont: UIFont?
@@ -542,10 +555,21 @@ public class ZAlertView: UIViewController {
     // MARK: - Show & hide
     
     public func show() {
-        showWithDuration(0.3)
+        if ZAlertView.duration < 0.1
+        {
+            ZAlertView.duration = 0.3
+        }
+        
+        showWithDuration(Double(ZAlertView.duration))
     }
     
     public func dismiss() {
+        
+        if ZAlertView.duration < 0.1
+        {
+            ZAlertView.duration = 0.3
+        }
+        
         dismissWithDuration(0.3)
     }
     
@@ -553,6 +577,25 @@ public class ZAlertView: UIViewController {
         if viewNotReady() {
             return
         }
+        
+        if ZAlertView.damping <= 0
+        {
+            ZAlertView.damping = 0.1
+        }
+        else if ZAlertView.damping >= 1
+        {
+            ZAlertView.damping = 1
+        }
+        
+        if ZAlertView.initialSpringVelocity <= 0
+        {
+            ZAlertView.initialSpringVelocity = 0.1
+        }
+        else if ZAlertView.initialSpringVelocity >= 1
+        {
+            ZAlertView.initialSpringVelocity = 1
+        }
+        
         
         self.alertWindow.addSubview(self.view)
         self.alertWindow.makeKeyAndVisible()
@@ -594,6 +637,68 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = currentFrame
                 self.backgroundView.alpha = ZAlertView.backgroundAlpha
             }
+        case .BounceTop:
+            self.backgroundView.alpha = 0
+            let currentFrame = self.alertView.frame
+            self.alertView.frame = CGRectMake(currentFrame.origin.x, -currentFrame.size.height*4, currentFrame.size.width, currentFrame.size.height)
+            
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+              
+                self.alertView.frame = currentFrame
+                self.backgroundView.alpha = ZAlertView.backgroundAlpha
+                
+                }, completion: {  fn in
+                    
+            })
+            
+            case .BounceBottom:
+            self.backgroundView.alpha = 0
+            let currentFrame = self.alertView.frame
+            self.alertView.frame = CGRectMake(currentFrame.origin.x, self.view.frame.size.height, currentFrame.size.width, currentFrame.size.height)
+            
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                
+                self.alertView.frame = currentFrame
+                self.backgroundView.alpha = ZAlertView.backgroundAlpha
+                
+                }, completion: {  fn in
+                    
+            })
+        case .BounceLeft:
+            self.backgroundView.alpha = 0
+            let currentFrame = self.alertView.frame
+           self.alertView.frame = CGRectMake(self.view.frame.size.width, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height)
+            
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                
+                self.alertView.frame = currentFrame
+                self.backgroundView.alpha = ZAlertView.backgroundAlpha
+                
+                }, completion: {  fn in
+                    
+            })
+            
+        case .BounceRight:
+            self.backgroundView.alpha = 0
+            let currentFrame = self.alertView.frame
+            self.alertView.frame = CGRectMake(-currentFrame.size.width, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height)
+            
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                
+                self.alertView.frame = currentFrame
+                self.backgroundView.alpha = ZAlertView.backgroundAlpha
+                
+                }, completion: {  fn in
+                    
+            })
+            
+
+
+
+            
+          
+        default:
+            break
         }
     }
     
@@ -651,6 +756,43 @@ public class ZAlertView: UIViewController {
                     self.backgroundView.alpha = 0
                 },
                 completion: completion)
+            
+        case .BounceBottom:
+            self.backgroundView.alpha = ZAlertView.backgroundAlpha
+            let currentFrame = self.alertView.frame
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.alertView.frame = CGRectMake(currentFrame.origin.x, self.view.frame.size.height, currentFrame.size.width, currentFrame.size.height)
+                self.backgroundView.alpha = 0
+                }, completion: completion)
+       
+        case .BounceTop:
+            self.backgroundView.alpha = ZAlertView.backgroundAlpha
+            let currentFrame = self.alertView.frame
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.alertView.frame = CGRectMake(currentFrame.origin.x, -currentFrame.size.height, currentFrame.size.width, currentFrame.size.height)
+                self.backgroundView.alpha = 0
+                }, completion: completion)
+
+        case .BounceLeft:
+            
+            self.backgroundView.alpha = ZAlertView.backgroundAlpha
+            let currentFrame = self.alertView.frame
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.alertView.frame = CGRectMake(self.view.frame.size.width, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height)
+                self.backgroundView.alpha = 0
+                }, completion: completion)
+            
+        case .BounceRight:
+            
+            self.backgroundView.alpha = ZAlertView.backgroundAlpha
+            let currentFrame = self.alertView.frame
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: ZAlertView.damping, initialSpringVelocity: ZAlertView.initialSpringVelocity, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.alertView.frame = CGRectMake(-currentFrame.size.width, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height)
+                self.backgroundView.alpha = 0
+                }, completion: completion)
+            
+        default:
+            break
         }
     }
     
