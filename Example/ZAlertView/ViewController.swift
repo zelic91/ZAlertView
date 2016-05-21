@@ -16,8 +16,10 @@ class ViewController: UIViewController {
         ZAlertView.positiveColor = UIColor.color("#669999")!
         ZAlertView.negativeColor = UIColor.color("#CC3333")!
         ZAlertView.blurredBackground = true
-        ZAlertView.showAnimation = .FadeIn
-        ZAlertView.hideAnimation = .FlyBottom
+        ZAlertView.showAnimation = .BounceBottom
+        ZAlertView.hideAnimation = .BounceRight
+        ZAlertView.initialSpringVelocity = 0.9
+        ZAlertView.duration = 2
     }
     
     @IBAction func alertDialogButtonDidTouch(sender: AnyObject) {
