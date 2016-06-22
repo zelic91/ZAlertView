@@ -267,6 +267,7 @@ public class ZAlertView: UIViewController {
             self.btnOk.setTitle("OK", forState: UIControlState.Normal)
         }
         self.btnOk.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
+        self.btnOk.titleColor = ZAlertView.buttonTitleColor
         self.alertView.addSubview(btnOk)
         
         // Setup Cancel Button
@@ -277,6 +278,7 @@ public class ZAlertView: UIViewController {
             self.btnCancel.setTitle("Cancel", forState: UIControlState.Normal)
         }
         self.btnCancel.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
+        self.btnCancel.titleColor = ZAlertView.buttonTitleColor
         self.alertView.addSubview(btnCancel)
         
         // Setup Close button
@@ -287,6 +289,7 @@ public class ZAlertView: UIViewController {
             self.btnClose.setTitle("Close", forState: UIControlState.Normal)
         }
         self.btnClose.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
+        self.btnClose.titleColor = ZAlertView.buttonTitleColor
         self.alertView.addSubview(btnClose)
     }
     
@@ -664,7 +667,11 @@ public class ZAlertView: UIViewController {
         var touchHandler: TouchHandler?
         
         var color: UIColor?
-        var titleColor: UIColor?
+        var titleColor: UIColor? {
+            didSet {
+                self.setTitleColor(titleColor, forState: .Normal)
+            }
+        }
         
         init(touchHandler: TouchHandler?) {
             super.init(frame: CGRectZero)

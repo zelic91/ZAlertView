@@ -13,11 +13,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ZAlertView.positiveColor = UIColor.color("#669999")!
-        ZAlertView.negativeColor = UIColor.color("#CC3333")!
+        ZAlertView.positiveColor     = UIColor.color("#669999")!
+        ZAlertView.negativeColor     = UIColor.color("#CC3333")!
         ZAlertView.blurredBackground = true
-        ZAlertView.showAnimation = .FadeIn
-        ZAlertView.hideAnimation = .FlyBottom
+        ZAlertView.showAnimation     = .FadeIn
+        ZAlertView.hideAnimation     = .FlyBottom
     }
     
     @IBAction func alertDialogButtonDidTouch(sender: AnyObject) {
@@ -69,11 +69,11 @@ class ViewController: UIViewController {
     @IBAction func multipleChoiceDialogButtonDidTouch(sender: AnyObject) {
         let dialog = ZAlertView(title: "More", message: nil, alertType: ZAlertView.AlertType.MultipleChoice)
         
-        dialog.addButton("Share to Facebook", touchHandler: { alertView in
+        dialog.addButton("Share to Facebook", hexColor: "#EFEFEF", hexTitleColor: "#999999", touchHandler: { alertView in
             alertView.dismiss()
         })
         
-        dialog.addButton("Share to Twitter", touchHandler: { alertView in
+        dialog.addButton("Share to Twitter", hexColor: "#EFEFEF", hexTitleColor: "#999999", touchHandler: { alertView in
             alertView.dismiss()
         })
         

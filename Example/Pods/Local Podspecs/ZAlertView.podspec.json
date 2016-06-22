@@ -1,8 +1,8 @@
 {
   "name": "ZAlertView",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "summary": "A customizable AlertView written in Swift.",
-  "description": "This lib is a substitution to the system AlertView.",
+  "description": "A customizable AlertView written in Swift as a present for my 26th birthday. Of course, current libraries don't fit my need, so I have to rewrite one for later extensibility.",
   "homepage": "https://github.com/zelic91/ZAlertView",
   "license": "MIT",
   "authors": {
@@ -10,16 +10,11 @@
   },
   "source": {
     "git": "https://github.com/zelic91/ZAlertView.git",
-    "tag": "0.1.0"
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "8.0"
   },
   "requires_arc": true,
-  "source_files": "Pod/Classes/**/*",
-  "resource_bundles": {
-    "ZAlertView": [
-      "Pod/Assets/*.png"
-    ]
-  }
+  "source_files": "Pod/Classes/**/*"
 }
