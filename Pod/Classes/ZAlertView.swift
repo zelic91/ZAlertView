@@ -278,6 +278,7 @@ public class ZAlertView: UIViewController {
             self.btnOk.setTitle("OK", forState: UIControlState.Normal)
         }
         self.btnOk.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnOk.setTitleColor(ZAlertView.normalTextColor, forState: .Normal)
         self.alertView.addSubview(btnOk)
         
         // Setup Cancel Button
@@ -288,6 +289,7 @@ public class ZAlertView: UIViewController {
             self.btnCancel.setTitle("Cancel", forState: UIControlState.Normal)
         }
         self.btnCancel.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnCancel.setTitleColor(ZAlertView.cancelTextColor, forState: .Normal)
         self.alertView.addSubview(btnCancel)
         
         // Setup Close button
@@ -298,6 +300,7 @@ public class ZAlertView: UIViewController {
             self.btnClose.setTitle("Close", forState: UIControlState.Normal)
         }
         self.btnClose.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
+        self.btnClose.setTitleColor(ZAlertView.cancelTextColor, forState: .Normal)
         self.alertView.addSubview(btnClose)
         
         // Setup font
