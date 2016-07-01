@@ -13,13 +13,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ZAlertView.positiveColor     = UIColor.color("#669999")!
-        ZAlertView.negativeColor     = UIColor.color("#CC3333")!
-        ZAlertView.blurredBackground = true
-        ZAlertView.showAnimation = .BounceBottom
-        ZAlertView.hideAnimation = .BounceRight
-        ZAlertView.initialSpringVelocity = 0.9
-        ZAlertView.duration = 2
+        ZAlertView.positiveColor            = UIColor.color("#669999")
+        ZAlertView.negativeColor            = UIColor.color("#CC3333")
+        ZAlertView.blurredBackground        = true
+        ZAlertView.showAnimation            = .BounceBottom
+        ZAlertView.hideAnimation            = .BounceRight
+        ZAlertView.initialSpringVelocity    = 0.9
+        ZAlertView.duration                 = 2
+        ZAlertView.textFieldTextColor       = UIColor.brownColor()
+        ZAlertView.textFieldBackgroundColor = UIColor.color("#EFEFEF")
+        ZAlertView.textFieldBorderColor     = UIColor.color("#669999")
     }
     
     @IBAction func alertDialogButtonDidTouch(sender: AnyObject) {

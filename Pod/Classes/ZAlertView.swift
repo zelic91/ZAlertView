@@ -58,14 +58,14 @@ public class ZAlertView: UIViewController {
     public static var cornerRadius: CGFloat          = ZAlertView.CornerRadius
     public static var buttonHeight: CGFloat          = ZAlertView.ButtonHeight
     public static var buttonSectionExtraGap: CGFloat = ZAlertView.ButtonSectionExtraGap
-    public static var textFieldHeight: CGFloat = ZAlertView.TextFieldHeight
-    public static var backgroundAlpha: CGFloat = ZAlertView.BackgroundAlpha
-    public static var blurredBackground: Bool = false
-    public static var showAnimation: ShowAnimation = .FadeIn
-    public static var hideAnimation: HideAnimation = .FadeOut
-    public static var duration:CGFloat = 0.3
-    public static var initialSpringVelocity:CGFloat = 0.5
-    public static var damping:CGFloat = 0.5
+    public static var textFieldHeight: CGFloat       = ZAlertView.TextFieldHeight
+    public static var backgroundAlpha: CGFloat       = ZAlertView.BackgroundAlpha
+    public static var blurredBackground: Bool        = false
+    public static var showAnimation: ShowAnimation   = .FadeIn
+    public static var hideAnimation: HideAnimation   = .FadeOut
+    public static var duration:CGFloat               = 0.3
+    public static var initialSpringVelocity:CGFloat  = 0.5
+    public static var damping:CGFloat                = 0.5
     
     
     // Font
@@ -74,14 +74,17 @@ public class ZAlertView: UIViewController {
     public static var buttonFont: UIFont?
     
     // Color
-    public static var positiveColor: UIColor?    = UIColor(red:0.09, green:0.47, blue:0.24, alpha:1.0)
-    public static var negativeColor: UIColor?    = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
-    public static var neutralColor: UIColor?     = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
-    public static var titleColor: UIColor?       = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var buttonTitleColor: UIColor? = UIColor.whiteColor()
-    public static var messageColor: UIColor?     = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var cancelTextColor: UIColor?  = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var normalTextColor: UIColor?  = UIColor.whiteColor()
+    public static var positiveColor: UIColor?            = UIColor(red:0.09, green:0.47, blue:0.24, alpha:1.0)
+    public static var negativeColor: UIColor?            = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
+    public static var neutralColor: UIColor?             = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
+    public static var titleColor: UIColor?               = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var buttonTitleColor: UIColor?         = UIColor.whiteColor()
+    public static var messageColor: UIColor?             = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var cancelTextColor: UIColor?          = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var normalTextColor: UIColor?          = UIColor.whiteColor()
+    public static var textFieldTextColor: UIColor?       = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var textFieldBorderColor: UIColor?     = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var textFieldBackgroundColor: UIColor? = UIColor.whiteColor()
     
     // MARK: -
     public var alertType: AlertType = AlertType.Alert
@@ -470,16 +473,26 @@ public class ZAlertView: UIViewController {
         textField.placeholder        = placeHolder
         textField.layer.cornerRadius = ZAlertView.cornerRadius
         textField.layer.borderWidth  = 1
-        if ZAlertView.positiveColor != nil {
+        if ZAlertView.textFieldBorderColor != nil {
+            textField.layer.borderColor = ZAlertView.textFieldBorderColor!.CGColor
+        } else if ZAlertView.positiveColor != nil {
             textField.layer.borderColor = ZAlertView.positiveColor!.CGColor
         }
+        
+        if ZAlertView.textFieldBackgroundColor != nil {
+            textField.backgroundColor = ZAlertView.textFieldBackgroundColor
+        }
+        
+        if ZAlertView.textFieldTextColor != nil {
+            textField.textColor = ZAlertView.textFieldTextColor
+        }
+        
         textField.clipsToBounds = true
         if isSecured {
             textField.secureTextEntry = true
         }
         textFields.append(textField)
         self.alertView.addSubview(textField)
-        
     }
     
     public func addButton(title: String, touchHandler: TouchHandler) {
@@ -694,11 +707,6 @@ public class ZAlertView: UIViewController {
                     
             })
             
-
-
-
-            
-          
         default:
             break
         }
