@@ -113,10 +113,10 @@ public class ZAlertView: UIViewController {
     public var allowTouchOutsideToDismiss: Bool = true {
         didSet {
             if allowTouchOutsideToDismiss == false {
-                self.tapOutsideTouchGestureRecognizer.removeTarget(self, action: "dismiss")
+                self.tapOutsideTouchGestureRecognizer.removeTarget(self, action: #selector(ZAlertView.dismiss))
             }
             else {
-                self.tapOutsideTouchGestureRecognizer.addTarget(self, action: "dismiss")
+                self.tapOutsideTouchGestureRecognizer.addTarget(self, action: #selector(ZAlertView.dismiss))
             }
         }
     }
@@ -249,7 +249,7 @@ public class ZAlertView: UIViewController {
         }
         // Gesture for background
         if allowTouchOutsideToDismiss == true {
-            self.tapOutsideTouchGestureRecognizer.addTarget(self, action: "dismiss")
+            self.tapOutsideTouchGestureRecognizer.addTarget(self, action: #selector(ZAlertView.dismiss))
         }
         backgroundView.addGestureRecognizer(self.tapOutsideTouchGestureRecognizer)
         self.view.addSubview(backgroundView)
@@ -374,7 +374,7 @@ public class ZAlertView: UIViewController {
             btnClose.setBackgroundImage(UIImage.imageWithSolidColor(ZAlertView.positiveColor, size: btnClose.frame.size), forState: UIControlState.Normal)
             btnClose.layer.cornerRadius = ZAlertView.cornerRadius
             btnClose.clipsToBounds      = true
-            btnClose.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
+            btnClose.addTarget(self, action: #selector(ZAlertView.buttonDidTouch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             self.height                 += ZAlertView.buttonHeight
             
         case .Confirmation:
@@ -394,12 +394,12 @@ public class ZAlertView: UIViewController {
             btnCancel.setBackgroundImage(UIImage.imageWithSolidColor(ZAlertView.negativeColor, size: btnCancel.frame.size), forState: UIControlState.Normal)
             btnCancel.layer.cornerRadius = ZAlertView.cornerRadius
             btnCancel.clipsToBounds = true
-            self.btnCancel.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.btnCancel.addTarget(self, action: #selector(ZAlertView.buttonDidTouch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             btnOk.setBackgroundImage(UIImage.imageWithSolidColor(ZAlertView.positiveColor, size: btnOk.frame.size), forState: UIControlState.Normal)
             btnOk.layer.cornerRadius = ZAlertView.cornerRadius
             btnOk.clipsToBounds = true
-            self.btnOk.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.btnOk.addTarget(self, action: #selector(ZAlertView.buttonDidTouch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             self.height += ZAlertView.buttonHeight
             
         case .MultipleChoice:
@@ -473,6 +473,7 @@ public class ZAlertView: UIViewController {
         textField.placeholder        = placeHolder
         textField.layer.cornerRadius = ZAlertView.cornerRadius
         textField.layer.borderWidth  = 1
+
         if ZAlertView.textFieldBorderColor != nil {
             textField.layer.borderColor = ZAlertView.textFieldBorderColor!.CGColor
         } else if ZAlertView.positiveColor != nil {
@@ -517,7 +518,7 @@ public class ZAlertView: UIViewController {
         button.color            = color
         button.titleColor       = titleColor
         button.titleLabel?.font = font
-        button.addTarget(self, action: Selector("buttonDidTouch:"), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(ZAlertView.buttonDidTouch(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         buttons.append(button)
         self.alertView.addSubview(button)
     }
@@ -537,9 +538,9 @@ public class ZAlertView: UIViewController {
     // MARK: - Handle keyboard
     
     func registerKeyboardEvents() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ZAlertView.keyboardDidShow(_:)), name:UIKeyboardDidShowNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ZAlertView.keyboardDidHide(_:)), name:UIKeyboardDidHideNotification, object: nil)
     }
     
     func keyboardDidShow(notification: NSNotification) {
@@ -662,7 +663,7 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = currentFrame
                 self.backgroundView.alpha = ZAlertView.backgroundAlpha
                 
-                }, completion: {  fn in
+                }, completion: {  _ in
                     
             })
             
@@ -676,7 +677,7 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = currentFrame
                 self.backgroundView.alpha = ZAlertView.backgroundAlpha
                 
-                }, completion: {  fn in
+                }, completion: {  _ in
                     
             })
         case .BounceLeft:
@@ -689,7 +690,7 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = currentFrame
                 self.backgroundView.alpha = ZAlertView.backgroundAlpha
                 
-                }, completion: {  fn in
+                }, completion: {  _ in
                     
             })
             
@@ -703,12 +704,9 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = currentFrame
                 self.backgroundView.alpha = ZAlertView.backgroundAlpha
                 
-                }, completion: {  fn in
+                }, completion: {  _ in
                     
             })
-            
-        default:
-            break
         }
     }
     
@@ -800,9 +798,6 @@ public class ZAlertView: UIViewController {
                 self.alertView.frame = CGRectMake(-currentFrame.size.width, currentFrame.origin.y, currentFrame.size.width, currentFrame.size.height)
                 self.backgroundView.alpha = 0
                 }, completion: completion)
-            
-        default:
-            break
         }
     }
     
