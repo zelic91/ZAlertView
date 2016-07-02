@@ -83,6 +83,11 @@ There are plenty of attributes that you can use to make your own style for the w
   public static var messageColor: UIColor?
   public static var cancelTextColor: UIColor?
   public static var normalTextColor: UIColor?
+
+  //Text field style
+  public static var textFieldTextColor: UIColor?
+  public static var textFieldBorderColor: UIColor?
+  public static var textFieldBackgroundColor: UIColor?
 ```
 
 There are also some basic animations:
