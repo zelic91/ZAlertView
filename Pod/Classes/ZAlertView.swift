@@ -140,9 +140,12 @@ public class ZAlertView: UIViewController {
     var textFields: [ZTextField] = []
     
     // Handlers
-    public var cancelHandler: TouchHandler? = { alertView in
-        alertView.dismiss()
+    public var cancelHandler: TouchHandler? {
+        didSet {
+            btnCancel.touchHandler = cancelHandler
+        }
     }
+
     
     public var okHandler: TouchHandler? {
         didSet {
