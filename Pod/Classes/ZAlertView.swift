@@ -79,10 +79,10 @@ import UIKit
     public static var negativeColor: UIColor?            = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
     public static var neutralColor: UIColor?             = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
     public static var titleColor: UIColor?               = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var buttonTitleColor: UIColor?         = UIColor.whiteColor()
     public static var messageColor: UIColor?             = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var cancelTextColor: UIColor?          = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
-    public static var normalTextColor: UIColor?          = UIColor.whiteColor()
+    public static var buttonTitleColor: UIColor?         = UIColor.whiteColor()
+    public static var buttonCancelColor: UIColor?        = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
+    public static var buttonCloseColor: UIColor?         = UIColor.whiteColor()
     public static var textFieldTextColor: UIColor?       = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
     public static var textFieldBorderColor: UIColor?     = UIColor(red:0.5, green:0.55, blue:0.55, alpha:1.0)
     public static var textFieldBackgroundColor: UIColor? = UIColor.whiteColor()
@@ -299,7 +299,7 @@ import UIKit
             self.btnCancel.setTitle("Cancel", forState: UIControlState.Normal)
         }
         self.btnCancel.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
-        self.btnCancel.titleColor = ZAlertView.buttonTitleColor
+        self.btnCancel.titleColor = ZAlertView.buttonCancelColor
         self.alertView.addSubview(btnCancel)
         
         // Setup Close button
@@ -310,7 +310,7 @@ import UIKit
             self.btnClose.setTitle("Close", forState: UIControlState.Normal)
         }
         self.btnClose.titleLabel?.font = ZAlertView.buttonFont ?? UIFont.boldSystemFontOfSize(14)
-        self.btnClose.titleColor = ZAlertView.buttonTitleColor
+        self.btnClose.titleColor = ZAlertView.buttonCloseColor
         self.alertView.addSubview(btnClose)
     }
     
