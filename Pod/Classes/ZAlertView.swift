@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ZAlertView: UIViewController {
+@objc public class ZAlertView: UIViewController {
     
     public enum AlertType: Int {
         case Alert

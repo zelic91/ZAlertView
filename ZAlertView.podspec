@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ZAlertView"
-  s.version          = "0.2.1"
+  s.version          = "0.2.2"
   s.summary          = "A customizable AlertView written in Swift."
   s.description      = <<-DESC
 A customizable AlertView written in Swift as a present for my 26th birthday. Of course, current libraries don't fit my need, so I have to rewrite one for later extensibility.
