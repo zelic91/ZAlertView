@@ -13,6 +13,20 @@
 
 ZAlertView is a highly customizable dialog (exaggerated, right?) view which can be used as a substitution for UIAlertView. It's written in Swift. This is the gift I give to myself on my 26th birthday.
 
+## Import
+
+For Swift
+
+```swift
+  import ZAlertView
+```
+
+For Objective-C
+
+```objective-c
+  #import "ZAlertView-Swift.h"
+```
+
 ## Usage
 
 There are 3 types of dialog that ZAlertView currently supports: Alert, Confirmation (Yes/No) and  Multiple choice. TextFields can also be added to any of those types.
