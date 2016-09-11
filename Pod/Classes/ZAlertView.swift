@@ -66,6 +66,7 @@ public class ZAlertView: UIViewController {
     public static var duration:CGFloat               = 0.3
     public static var initialSpringVelocity:CGFloat  = 0.5
     public static var damping:CGFloat                = 0.5
+    public static var statusBarStyle: UIStatusBarStyle?
     
     
     // Font
@@ -142,6 +143,10 @@ public class ZAlertView: UIViewController {
     // Handlers
     public var cancelHandler: TouchHandler? = { alertView in
         alertView.dismiss()
+    }{
+        didSet {
+            btnCancel.touchHandler = cancelHandler
+        }
     }
     
     public var okHandler: TouchHandler? {
@@ -430,6 +435,15 @@ public class ZAlertView: UIViewController {
         self.height += ZAlertView.padding
         let bounds = self.view.bounds
         self.alertView.frame = CGRectMake(bounds.width/2 - width/2, bounds.height/2 - height/2, width, height)
+    }
+    
+    // MARK: - Override methods
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        if let statusBarStyle = ZAlertView.statusBarStyle {
+            return statusBarStyle
+        }
+        return UIApplication.sharedApplication().statusBarStyle
     }
     
     // MARK: - Convenient helpers
