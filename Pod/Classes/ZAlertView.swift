@@ -246,12 +246,7 @@ import UIKit
         
         // Setup background view
         self.backgroundView = UIView(frame: self.view.bounds)
-        if ZAlertView.blurredBackground {
-            self.backgroundView.addSubview(UIImageView(image: UIImage.imageFromScreen().applyBlurWithRadius(2, tintColor: UIColor(white: 0.5, alpha: 0.7), saturationDeltaFactor: 1.8)))
-        } else {
-            self.backgroundView.backgroundColor = UIColor.blackColor()
-            self.backgroundView.alpha = ZAlertView.backgroundAlpha
-        }
+        
         // Gesture for background
         if allowTouchOutsideToDismiss == true {
             self.tapOutsideTouchGestureRecognizer.addTarget(self, action: #selector(ZAlertView.dismiss))
@@ -327,6 +322,16 @@ import UIKit
     override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         var hasContent = false
+        
+        if ZAlertView.blurredBackground {
+            self.backgroundView.subviews.forEach({ (view) in
+                view.removeFromSuperview()
+            })
+            self.backgroundView.addSubview(UIImageView(image: UIImage.imageFromScreen().applyBlurWithRadius(2, tintColor: UIColor(white: 0.5, alpha: 0.7), saturationDeltaFactor: 1.8)))
+        } else {
+            self.backgroundView.backgroundColor = UIColor.blackColor()
+            self.backgroundView.alpha = ZAlertView.backgroundAlpha
+        }
         
         if let title = self.alertTitle {
             hasContent      = true
@@ -433,7 +438,7 @@ import UIKit
         }
         
         self.height += ZAlertView.padding
-        let bounds = self.view.bounds
+        let bounds = UIScreen.mainScreen().bounds
         self.alertView.frame = CGRectMake(bounds.width/2 - width/2, bounds.height/2 - height/2, width, height)
     }
     
@@ -817,6 +822,11 @@ import UIKit
     
     func viewNotReady() -> Bool {
         return UIApplication.sharedApplication().keyWindow == nil
+    }
+    
+    public override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.view.layoutSubviews()
+        self.view.setNeedsDisplay()
     }
     
     // MARK: - Subclasses
