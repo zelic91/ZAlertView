@@ -563,14 +563,15 @@ import UIKit
     }
     
     func keyboardDidShow(_ notification: Notification) {
-        let info = (notification as NSNotification).userInfo
-        let keyboardSize = ((info![UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size)
-        self.oldFrame = self.alertView.frame
-        let extraHeight = (oldFrame.size.height + oldFrame.origin.y) - (self.view.frame.size.height - keyboardSize.height)
-        if extraHeight > 0 {
-            UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                self.alertView.frame = CGRect(x: self.oldFrame.origin.x, y: self.oldFrame.origin.y - extraHeight - 8, width: self.oldFrame.size.width, height: self.oldFrame.size.height)
-            })
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.oldFrame = self.alertView.frame
+            let extraHeight = (oldFrame.size.height + oldFrame.origin.y) - (self.view.frame.size.height - keyboardSize.height)
+            if extraHeight > 0 {
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    self.alertView.frame = CGRect(x: self.oldFrame.origin.x, y: self.oldFrame.origin.y - extraHeight - 8, width: self.oldFrame.size.width, height: self.oldFrame.size.height)
+                })
+            }
         }
     }
     
