@@ -329,7 +329,7 @@ import UIKit
             })
             self.backgroundView.addSubview(UIImageView(image: UIImage.imageFromScreen().applyBlurWithRadius(2, tintColor: UIColor(white: 0.5, alpha: 0.7), saturationDeltaFactor: 1.8)))
         } else {
-            self.backgroundView.backgroundColor = UIColor.blackColor()
+            self.backgroundView.backgroundColor = UIColor.black
             self.backgroundView.alpha = ZAlertView.backgroundAlpha
         }
         
@@ -438,7 +438,7 @@ import UIKit
         }
         
         self.height += ZAlertView.padding
-        let bounds = UIScreen.mainScreen().bounds
+        let bounds = UIScreen.main.bounds
         self.alertView.frame = CGRect(x: bounds.width/2 - width/2, y: bounds.height/2 - height/2, width: width, height: height)
     }
     
@@ -824,7 +824,7 @@ import UIKit
         return UIApplication.shared.keyWindow == nil
     }
     
-    public override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    open override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         self.view.layoutSubviews()
         self.view.setNeedsDisplay()
     }

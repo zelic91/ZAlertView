@@ -1,6 +1,6 @@
 {
   "name": "ZAlertView",
-  "version": "0.2.2",
+  "version": "0.3.1",
   "summary": "A customizable AlertView written in Swift.",
   "description": "A customizable AlertView written in Swift as a present for my 26th birthday. Of course, current libraries don't fit my need, so I have to rewrite one for later extensibility.",
   "homepage": "https://github.com/zelic91/ZAlertView",
@@ -10,10 +10,10 @@
   },
   "source": {
     "git": "https://github.com/zelic91/ZAlertView.git",
-    "tag": "0.2.2"
+    "tag": "0.3.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*"

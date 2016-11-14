@@ -30,20 +30,6 @@ class TableOfContentsSpec: QuickSpec {
                     expect("🐮") == "🐮"
                 }
 
-                it("will eventually pass") {
-                    var time = "passing"
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                        time = "done"
-                    }
-
-                    waitUntil { done in
-                        NSThread.sleepForTimeInterval(0.5)
-                        expect(time) == "done"
-
-                        done()
-                    }
-                }
             }
         }
     }

@@ -1,6 +1,4 @@
-<!-- Hiding until we have Swift 2 on CI: [![Build Status](https://travis-ci.org/ashfurrow/Nimble-Snapshots.svg)](https://travis-ci.org/ashfurrow/Nimble-Snapshots) -->
-
-Nimble-Snapshots [![Build Status](https://travis-ci.org/Moya/Moya.svg?branch=master)](https://travis-ci.org/Moya/Moya)
+Nimble-Snapshots [![Build Status](https://travis-ci.org/ashfurrow/Nimble-Snapshots.svg)](https://travis-ci.org/ashfurrow/Nimble-Snapshots)
 =============================
 
 [Nimble](https://github.com/Quick/Nimble) matchers for [FBSnapshotTestCase](https://github.com/facebook/ios-snapshot-test-case).
@@ -13,7 +11,7 @@ Highly derivative of [Expecta Matchers for FBSnapshotTestCase](https://github.co
 Installing
 ----------
 
-You need to be using CocoaPods 0.36 Beta 1 or higher. Your podfile should look
+You need to be using CocoaPods 0.36 Beta 1 or higher. Your Podfile should look
 something like the following.
 
 ```rb
@@ -48,7 +46,7 @@ class MySpec: QuickSpec {
                 let view = ... // some view you want to test
                 expect(view).to( haveValidSnapshot() )
             }
-        });
+        })
     }
 }
 ```
@@ -84,3 +82,36 @@ in your unit test's path that we should use. For example, if the tests are in
 
 If you have any questions or run into any trouble, feel free to open an issue
 on this repo. 
+
+## Dynamic Type
+
+Testing Dynamic Type manually is boring and no one seems to remember doing it 
+when implementing a view/screen, so you can have snapshot tests according to 
+content size categories.
+
+First, you'll need to change you Podfile to import the Dynamic Type subspec:
+
+```ruby
+pod 'Nimble-Snapshots/DynamicType'
+ ```
+ 
+Then you can use the `haveValidDynamicTypeSnapshot` and 
+`recordDynamicTypeSnapshot` matchers:
+
+```swift
+// expect(view).to(recordDynamicTypeSnapshot()
+expect(view).to(haveValidDynamicTypeSnapshot())
+
+// You can also just test some sizes:
+expect(view).to(haveValidDynamicTypeSnapshot(sizes: [UIContentSizeCategoryExtraLarge]))
+
+// If you prefer the == syntax, we got you covered too:
+expect(view) == dynamicTypeSnapshot()
+expect(view) == dynamicTypeSnapshot(sizes: [UIContentSizeCategoryExtraLarge])
+```
+
+Note that this will post an `UIContentSizeCategoryDidChangeNotification`, 
+so your views/view controllers need to observe that and update themselves.
+
+For more info on usage, check out the 
+[dynamic type tests](Bootstrap/BootstrapTests/DynamicTypeTests.swift).
