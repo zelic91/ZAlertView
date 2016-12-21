@@ -569,7 +569,6 @@ import UIKit
     
     func keyboardDidShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
             self.oldFrame = self.alertView.frame
             let extraHeight = (oldFrame.size.height + oldFrame.origin.y) - (self.view.frame.size.height - keyboardSize.height)
             if extraHeight > 0 {
