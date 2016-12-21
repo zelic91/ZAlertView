@@ -113,11 +113,12 @@ import UIKit
     
     open var allowTouchOutsideToDismiss: Bool = true {
         didSet {
+            weak var weakSelf = self
             if allowTouchOutsideToDismiss == false {
-                self.tapOutsideTouchGestureRecognizer.removeTarget(self, action: #selector(ZAlertView.dismissAlertView))
+                weakSelf?.tapOutsideTouchGestureRecognizer.removeTarget(weakSelf, action: #selector(ZAlertView.dismissAlertView))
             }
             else {
-                self.tapOutsideTouchGestureRecognizer.addTarget(self, action: #selector(ZAlertView.dismissAlertView))
+                weakSelf?.tapOutsideTouchGestureRecognizer.addTarget(weakSelf, action: #selector(ZAlertView.dismissAlertView))
             }
         }
     }
@@ -532,12 +533,13 @@ import UIKit
     }
     
     open func addButton(_ title: String, font: UIFont, color: UIColor?, titleColor: UIColor?, touchHandler: @escaping TouchHandler) {
+        weak var weakSelf = self
         let button              = ZButton(touchHandler: touchHandler)
         button.setTitle(title, for: UIControlState())
         button.color            = color
         button.titleColor       = titleColor
         button.titleLabel?.font = font
-        button.addTarget(self, action: #selector(ZAlertView.buttonDidTouch(_:)), for: UIControlEvents.touchUpInside)
+        button.addTarget(weakSelf!, action: #selector(ZAlertView.buttonDidTouch(_:)), for: UIControlEvents.touchUpInside)
         buttons.append(button)
         self.alertView.addSubview(button)
     }
@@ -549,8 +551,11 @@ import UIKit
     }
     
     func buttonDidTouch(_ sender: ZButton) {
+        weak var weakSelf = self
         if let listener = sender.touchHandler {
-            listener(self)
+            if (weakSelf != nil) {
+                listener(weakSelf!)
+            }
         }
     }
     
@@ -839,7 +844,8 @@ import UIKit
         var color: UIColor?
         var titleColor: UIColor? {
             didSet {
-                self.setTitleColor(titleColor, for: UIControlState())
+                weak var weakSelf = self
+                weakSelf?.setTitleColor(titleColor, for: UIControlState())
             }
         }
         
