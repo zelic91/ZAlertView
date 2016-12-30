@@ -115,10 +115,10 @@ import UIKit
         didSet {
             weak var weakSelf = self
             if allowTouchOutsideToDismiss == false {
-                weakSelf?.tapOutsideTouchGestureRecognizer.removeTarget(weakSelf, action: #selector(ZAlertView.dismissAlertView))
+                weakSelf?.tapOutsideTouchGestureRecognizer.removeTarget(weakSelf as Any, action: #selector(ZAlertView.dismissAlertView))
             }
             else {
-                weakSelf?.tapOutsideTouchGestureRecognizer.addTarget(weakSelf, action: #selector(ZAlertView.dismissAlertView))
+                weakSelf?.tapOutsideTouchGestureRecognizer.addTarget(weakSelf as Any, action: #selector(ZAlertView.dismissAlertView))
             }
         }
     }
