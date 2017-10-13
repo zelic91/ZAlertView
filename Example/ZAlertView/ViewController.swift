@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         )
         dialog.allowTouchOutsideToDismiss = false
         let attrStr = NSMutableAttributedString(string: "Are you sure you want to quit?")
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(10, 12))
+        attrStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red, range: NSMakeRange(10, 12))
         dialog.messageAttributedString = attrStr
         dialog.show()
     }

@@ -550,7 +550,7 @@ import UIKit
         }).first
     }
     
-    func buttonDidTouch(_ sender: ZButton) {
+    @objc func buttonDidTouch(_ sender: ZButton) {
         weak var weakSelf = self
         if let listener = sender.touchHandler {
             if (weakSelf != nil) {
@@ -567,7 +567,7 @@ import UIKit
         NotificationCenter.default.addObserver(self, selector: #selector(ZAlertView.keyboardDidHide(_:)), name:NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
-    func keyboardDidShow(_ notification: Notification) {
+    @objc func keyboardDidShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.oldFrame = self.alertView.frame
             let extraHeight = (oldFrame.size.height + oldFrame.origin.y) - (self.view.frame.size.height - keyboardSize.height)
@@ -579,7 +579,7 @@ import UIKit
         }
     }
     
-    func keyboardDidHide(_ notification: Notification) {
+    @objc func keyboardDidHide(_ notification: Notification) {
         if self.oldFrame == nil {
             return
         }
@@ -603,7 +603,7 @@ import UIKit
         showWithDuration(Double(ZAlertView.duration))
     }
     
-    open func dismissAlertView() {
+    @objc open func dismissAlertView() {
         
         if ZAlertView.duration < 0.1
         {
