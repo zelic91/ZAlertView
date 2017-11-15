@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B032F434AD961419E58A424 /* Pods_ZAlertView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3001E9051963C8F28FDAA82D /* Pods_ZAlertView_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		9174CD1E1D1ADB6100BA28C4 /* ZAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9174CD1C1D1ADB2700BA28C4 /* ZAlertView.framework */; };
-		9174CD1F1D1ADB6100BA28C4 /* ZAlertView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9174CD1C1D1ADB2700BA28C4 /* ZAlertView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DC0A38E4484CBD16B6A40F0A /* Pods_ZAlertView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4022FDD7BEDC62280A613165 /* Pods_ZAlertView_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,20 +25,6 @@
 			remoteInfo = ZAlertView;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		9174CD201D1ADB6100BA28C4 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9174CD1F1D1ADB6100BA28C4 /* ZAlertView.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		03485B7084B6BA4FA3F30773 /* Pods-ZAlertView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAlertView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZAlertView_Example/Pods-ZAlertView_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,8 +54,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B032F434AD961419E58A424 /* Pods_ZAlertView_Example.framework in Frameworks */,
-				9174CD1E1D1ADB6100BA28C4 /* ZAlertView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +172,6 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				AB5210AC616098D6BE8DE7AD /* [CP] Embed Pods Frameworks */,
 				1A7C31D2E41AE65D3666BF1C /* [CP] Copy Pods Resources */,
-				9174CD201D1ADB6100BA28C4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -516,7 +496,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03485B7084B6BA4FA3F30773 /* Pods-ZAlertView_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78B8A7HE4L;
 				INFOPLIST_FILE = ZAlertView/Info.plist;
@@ -533,7 +512,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 753653027C4D7D64FA2E8A01 /* Pods-ZAlertView_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78B8A7HE4L;
 				INFOPLIST_FILE = ZAlertView/Info.plist;
