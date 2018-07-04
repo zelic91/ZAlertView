@@ -441,9 +441,8 @@ import UIKit
         }
         
         self.height += ZAlertView.padding
-        let bounds = UIScreen.main.bounds
-        self.alertView.frame = CGRect(x: bounds.width/2 - width/2, y: bounds.height/2 - height/2, width: width, height: height)
         let bounds = self.backgroundView.bounds
+        self.alertView.frame = CGRect(x: bounds.width / 2 - width / 2, y: bounds.height / 2 - height / 2, width: width, height: height)
     }
     
     // MARK: - Override methods
